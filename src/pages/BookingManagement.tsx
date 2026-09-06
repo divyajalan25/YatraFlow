@@ -2,36 +2,28 @@ import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Calendar, TrendingUp, Cpu, QrCode, Ticket, Clock, AlertCircle, Percent, CheckCircle2, 
-  BarChart as ChartIcon, Zap, Filter, Search, ChevronRight, Activity, ArrowUpRight, Users, Bell,
-  Smartphone, Wifi, WifiOff, RefreshCw
+  BarChart as ChartIcon, Zap, Filter, Search, ChevronRight, Activity, ArrowUpRight, Users, Bell
 } from 'lucide-react';
 import { BOOKING_SLOTS, TEMPLES } from '@/lib/data';
 import { cn, formatNumber } from '@/lib/utils';
 import { showToast } from '@/components/ui/Toast';
 import { AreaChart, Area, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Cell } from 'recharts';
-import { useBridgeSync } from '@/hooks/useBridgeSync';
 
 export default function BookingManagement() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTemple, setSelectedTemple] = useState('all');
 
-  // 🔄 Live bridge sync — polls localhost:8000 every 5s
-  const bridge = useBridgeSync(5000);
-
-  // Use bridge slots if connected (they include mobile booking counts), else fallback to static
-  const activeSlots = bridge.connected && bridge.slots.length > 0 ? bridge.slots : BOOKING_SLOTS;
-
   const filteredSlots = useMemo(() => {
-    return activeSlots.filter(slot => {
+    return BOOKING_SLOTS.filter(slot => {
       const matchSearch = slot.type.toLowerCase().includes(searchQuery.toLowerCase());
       const matchTemple = selectedTemple === 'all' || slot.templeId === selectedTemple;
       return matchSearch && matchTemple;
     }).sort((a, b) => (b.booked / b.capacity) - (a.booked / a.capacity));
-  }, [searchQuery, selectedTemple, activeSlots]);
+  }, [searchQuery, selectedTemple]);
 
-  // Aggregate stats — includes live mobile bookings
-  const totalCapacity = activeSlots.reduce((acc, slot) => acc + slot.capacity, 0);
-  const totalBooked = activeSlots.reduce((acc, slot) => acc + slot.booked, 0);
+  // Aggregate stats
+  const totalCapacity = BOOKING_SLOTS.reduce((acc, slot) => acc + slot.capacity, 0);
+  const totalBooked = BOOKING_SLOTS.reduce((acc, slot) => acc + slot.booked, 0);
   const utilizationPercent = Math.round((totalBooked / totalCapacity) * 100);
 
   // Hourly curve mock data
@@ -307,76 +299,42 @@ export default function BookingManagement() {
                   </div>
                 </div>
               </div>
-            </div>
-                      
-            
 
-              {/* 📱 LIVE MOBILE BOOKINGS — from bridge server */}
+              {/* BOOKING ALERTS */}
               <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
                 <h2 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 flex items-center gap-1.5">
-                  <Smartphone className="w-3.5 h-3.5 text-blue-500" />
-                  Mobile App Bookings
-                  <span className={cn(
-                    'ml-auto text-[8px] font-bold px-2 py-0.5 rounded-full',
-                    bridge.connected ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-400'
-                  )}>
-                    {bridge.connected ? (
-                      <span className="flex items-center gap-1"><Wifi className="w-2.5 h-2.5" /> LIVE</span>
-                    ) : (
-                      <span className="flex items-center gap-1"><WifiOff className="w-2.5 h-2.5" /> Offline</span>
-                    )}
-                  </span>
+                  <Bell className="w-3.5 h-3.5 text-red-500" /> Live Booking Alerts
                 </h2>
-
-                {bridge.mobileBookings.length === 0 ? (
-                  <div className="text-center py-6">
-                    <Smartphone className="w-8 h-8 text-slate-200 mx-auto mb-2" />
-                    <div className="text-[10px] text-slate-400 font-medium">
-                      {bridge.connected
-                        ? 'No mobile bookings yet. Book a slot on the app!'
-                        : 'Bridge server offline. Run: cd bridge-server && node server.js'}
+                <div className="space-y-2">
+                  <div className="flex items-start gap-2 border-b border-slate-100 pb-2">
+                    <span className="w-2 h-2 rounded-full bg-red-500 shrink-0 mt-1" />
+                    <div>
+                      <div className="text-[10px] font-black text-[#0E1A2B] leading-tight">VIP Slot Sold Out</div>
+                      <div className="text-[9px] font-medium text-slate-500 mt-0.5">Dwarka Evening Aarti</div>
                     </div>
                   </div>
-                ) : (
-                  <div className="space-y-2">
-                    {bridge.mobileBookings.slice(0, 8).map(booking => (
-                      <div key={booking.id} className="flex items-start gap-2 border-b border-slate-100 pb-2 last:border-0 last:pb-0">
-                        <span className="w-2 h-2 rounded-full bg-blue-500 shrink-0 mt-1.5" />
-                        <div className="flex-1 min-w-0">
-                          <div className="text-[10px] font-black text-[#0E1A2B] leading-tight truncate">
-                            {booking.passHolderName}
-                          </div>
-                          <div className="text-[9px] font-medium text-slate-500 mt-0.5">
-                            {booking.templeId.charAt(0).toUpperCase() + booking.templeId.slice(1)} · {booking.time} · {booking.devoteeCount} devotee{booking.devoteeCount > 1 ? 's' : ''}
-                          </div>
-                          <div className="text-[8px] text-slate-400 font-mono">{booking.bookingRef}</div>
-                        </div>
-                        <div className="text-[8px] text-slate-400 shrink-0">
-                          {new Date(booking.timestamp).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
-                        </div>
-                      </div>
-                    ))}
-                    {bridge.mobileBookings.length > 8 && (
-                      <div className="text-[9px] text-blue-500 font-bold text-center pt-1">
-                        +{bridge.mobileBookings.length - 8} more mobile bookings
-                      </div>
-                    )}
+                  <div className="flex items-start gap-2 border-b border-slate-100 pb-2">
+                    <span className="w-2 h-2 rounded-full bg-orange-500 shrink-0 mt-1" />
+                    <div>
+                      <div className="text-[10px] font-black text-[#0E1A2B] leading-tight">Morning Capacity 95%</div>
+                      <div className="text-[9px] font-medium text-slate-500 mt-0.5">Somnath General Darshan</div>
+                    </div>
                   </div>
-                )}
-
-                {bridge.lastSynced && (
-                  <div className="flex items-center gap-1 mt-3 pt-2 border-t border-slate-100">
-                    <RefreshCw className="w-2.5 h-2.5 text-slate-300" />
-                    <span className="text-[8px] text-slate-400">
-                      Last synced {bridge.lastSynced.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
-                    </span>
-                    {bridge.totalMobileBookings > 0 && (
-                      <span className="ml-auto text-[8px] font-bold text-blue-600">
-                        {bridge.totalMobileBookings} total mobile
-                      </span>
-                    )}
+                  <div className="flex items-start gap-2 border-b border-slate-100 pb-2">
+                    <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0 mt-1" />
+                    <div>
+                      <div className="text-[10px] font-black text-[#0E1A2B] leading-tight">Evening Demand Increasing</div>
+                      <div className="text-[9px] font-medium text-slate-500 mt-0.5">+45% booking velocity vs baseline</div>
+                    </div>
                   </div>
-                )}
+                  <div className="flex items-start gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0 mt-1" />
+                    <div>
+                      <div className="text-[10px] font-black text-[#0E1A2B] leading-tight">Afternoon Capacity Available</div>
+                      <div className="text-[9px] font-medium text-slate-500 mt-0.5">All temples normal</div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* LIVE SUMMARY MINI */}
