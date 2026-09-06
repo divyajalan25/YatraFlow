@@ -398,6 +398,20 @@ html.dark .border-slate-800 {
   border-color: #1E293B !important;
 }
 
+html.dark .bg-surface,
+html.dark .bg-card,
+html.dark .card-base,
+html.dark .card-surface,
+html.dark [class*="bg-surface"],
+html.dark [class*="bg-[#F8F8F5]"] {
+  background-color: #121E33 !important;
+  border-color: #1E293B !important;
+}
+html.dark .text-text,
+html.dark .text-secondary {
+  color: #F1F5F9 !important;
+}
+
 
 /* GISMap Light Mode Overrides */
 html:not(.dark) .gis-map-wrapper {

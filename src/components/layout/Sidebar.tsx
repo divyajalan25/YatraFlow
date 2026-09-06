@@ -77,10 +77,10 @@ export default function Sidebar() {
       initial={false}
       animate={{ width: collapsed ? 72 : 260 }}
       transition={{ duration: 0.2, ease: 'easeInOut' }}
-      className="fixed left-0 top-0 h-screen z-50 flex flex-col bg-white border-r border-slate-200"
+      className="fixed left-0 top-0 h-screen z-50 flex flex-col bg-white dark:bg-[#0B1221] border-r border-slate-200 dark:border-slate-800"
     >
       {/* Logo & Header */}
-      <div className="flex items-center gap-3 px-4 h-16 border-b border-slate-100 flex-shrink-0 bg-white">
+      <div className="flex items-center gap-3 px-4 h-16 border-b border-slate-100 dark:border-slate-800 flex-shrink-0 bg-white dark:bg-[#0B1221]">
         <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-saffron-500 to-saffron-600 flex items-center justify-center flex-shrink-0 shadow-saffron-sm">
           <Shield className="w-5 h-5 text-white" />
         </div>
@@ -93,11 +93,11 @@ export default function Sidebar() {
               transition={{ duration: 0.15 }}
               className="overflow-hidden whitespace-nowrap"
             >
-              <div className="text-sm font-bold tracking-wide text-slate-900 flex items-center gap-1.5">
+              <div className="text-sm font-bold tracking-wide text-slate-900 dark:text-white flex items-center gap-1.5">
                 <span className="text-gradient">YatraFlow</span>
-                <span className="text-[8px] font-mono px-1.5 py-0.5 rounded-md bg-saffron-50 text-saffron-600 uppercase font-bold tracking-widest border border-saffron-200">OPS</span>
+                <span className="text-[8px] font-mono px-1.5 py-0.5 rounded-md bg-saffron-50 dark:bg-saffron-500/20 text-saffron-600 dark:text-saffron-400 uppercase font-bold tracking-widest border border-saffron-200 dark:border-saffron-500/30">OPS</span>
               </div>
-              <div className="text-[10px] text-slate-500 tracking-wider uppercase font-medium">
+              <div className="text-[10px] text-slate-500 dark:text-slate-400 tracking-wider uppercase font-medium">
                 Govt. of Gujarat · ICCC
               </div>
             </motion.div>
@@ -123,8 +123,8 @@ export default function Sidebar() {
                   className={cn(
                     'flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] font-medium transition-all duration-200 group relative',
                     isActive
-                      ? 'bg-saffron-50 text-saffron-600 font-semibold'
-                      : 'text-slate-500 hover:text-bharat-600 hover:bg-slate-50'
+                      ? 'bg-saffron-50 text-saffron-600 font-semibold dark:bg-saffron-500/20 dark:text-saffron-400'
+                      : 'text-slate-500 hover:text-bharat-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:text-bharat-400 dark:hover:bg-slate-800/50'
                   )}
                 >
                   {isActive && (
@@ -137,7 +137,7 @@ export default function Sidebar() {
                   <item.icon
                     className={cn(
                       'w-[18px] h-[18px] flex-shrink-0 transition-colors',
-                      isActive ? 'text-saffron-500' : 'text-slate-400 group-hover:text-bharat-500'
+                      isActive ? 'text-saffron-500 dark:text-saffron-400' : 'text-slate-400 group-hover:text-bharat-500 dark:group-hover:text-bharat-400'
                     )}
                   />
                   <AnimatePresence>

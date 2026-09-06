@@ -303,20 +303,20 @@ export default function AICopilot() {
     >
       {/* Sidebar - Operations Context */}
       <div className="md:w-[320px] shrink-0 flex flex-col gap-6 h-full">
-        <div className="card-base p-0 flex-1 flex flex-col overflow-hidden border-primary/20 shadow-[0_0_20px_rgba(249,115,22,0.05)]">
-          <div className="p-5 border-b border-border bg-surface/50">
+        <div className="card-base p-0 flex-1 flex flex-col overflow-hidden border-primary/20 shadow-[0_0_20px_rgba(249,115,22,0.05)] dark:bg-[#121E33] dark:border-slate-800">
+          <div className="p-5 border-b border-border dark:border-slate-800 bg-surface/50 dark:bg-[#121E33]/50">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center text-primary relative border border-primary/30 shadow-inner">
                 <Bot className="w-7 h-7" />
                 <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-card animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.6)]"></span>
               </div>
               <div>
-                <h2 className="text-lg font-bold text-[#0E1A2B] flex items-center gap-2">
+                <h2 className="text-lg font-bold text-[#0E1A2B] dark:text-white flex items-center gap-2">
                   YatraFlow AI
                 </h2>
                 <div className="flex items-center gap-2 text-xs font-mono mt-0.5">
                   <span className="text-primary font-bold">ONLINE</span>
-                  <span className="text-secondary">• Copilot v3.1</span>
+                  <span className="text-secondary dark:text-slate-400">• Copilot v3.1</span>
                 </div>
               </div>
             </div>
@@ -365,7 +365,7 @@ export default function AICopilot() {
       </div>
       
       {/* Main Chat Area */}
-      <div className="flex-1 card-base flex flex-col overflow-hidden relative h-full">
+      <div className="flex-1 card-base flex flex-col overflow-hidden relative h-full dark:bg-[#121E33] dark:border-slate-800">
         <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-8 scroll-smooth">
           {messages.map((msg, i) => (
             <motion.div 
@@ -383,14 +383,14 @@ export default function AICopilot() {
                   <div className="bg-primary/20 p-1 rounded">
                     <Bot className="w-4 h-4 text-primary" />
                   </div>
-                  <span className="text-xs font-bold text-text tracking-wide">YatraFlow AI</span>
-                  <span className="text-[10px] text-secondary font-mono ml-2">{msg.timestamp}</span>
+                  <span className="text-xs font-bold text-text dark:text-white tracking-wide">YatraFlow AI</span>
+                  <span className="text-[10px] text-secondary dark:text-slate-400 font-mono ml-2">{msg.timestamp}</span>
                 </div>
               )}
               {msg.role === 'user' && (
                 <div className="flex items-center justify-end gap-2 mb-2 mr-1">
-                  <span className="text-[10px] text-secondary font-mono mr-2">{msg.timestamp}</span>
-                  <span className="text-xs font-bold text-text tracking-wide">Command Center</span>
+                  <span className="text-[10px] text-secondary dark:text-slate-400 font-mono mr-2">{msg.timestamp}</span>
+                  <span className="text-xs font-bold text-text dark:text-white tracking-wide">Command Center</span>
                 </div>
               )}
               
@@ -398,12 +398,12 @@ export default function AICopilot() {
                 "p-5 rounded-2xl shadow-sm",
                 msg.role === 'user' 
                   ? "bg-primary text-white rounded-tr-sm" 
-                  : "bg-surface/80 border border-border/80 rounded-tl-sm w-full"
+                  : "bg-surface/80 dark:bg-[#1E293B]/80 border border-border/80 dark:border-slate-700/80 rounded-tl-sm w-full"
               )}>
                 {msg.role === 'user' ? (
                   <p className="text-[15px] font-medium tracking-wide">{msg.content}</p>
                 ) : (
-                  <div className="ai-content-renderer">
+                  <div className="ai-content-renderer dark:text-slate-200">
                     {renderMessageContent(msg.content)}
                   </div>
                 )}
@@ -421,9 +421,9 @@ export default function AICopilot() {
                 <div className="bg-primary/20 p-1 rounded">
                   <Bot className="w-4 h-4 text-primary" />
                 </div>
-                <span className="text-xs font-bold text-text tracking-wide">YatraFlow AI</span>
+                <span className="text-xs font-bold text-text dark:text-white tracking-wide">YatraFlow AI</span>
               </div>
-              <div className="p-5 bg-surface/80 border border-border/80 rounded-2xl rounded-tl-sm flex items-center gap-1.5 h-14">
+              <div className="p-5 bg-surface/80 dark:bg-[#1E293B]/80 border border-border/80 dark:border-slate-700/80 rounded-2xl rounded-tl-sm flex items-center gap-1.5 h-14">
                 <div className="w-2 h-2 rounded-full bg-primary/60 animate-bounce" style={{ animationDelay: '0ms' }} />
                 <div className="w-2 h-2 rounded-full bg-primary/60 animate-bounce" style={{ animationDelay: '150ms' }} />
                 <div className="w-2 h-2 rounded-full bg-primary/60 animate-bounce" style={{ animationDelay: '300ms' }} />
@@ -433,7 +433,7 @@ export default function AICopilot() {
         </div>
         
         {/* Input Area */}
-        <div className="p-5 border-t border-border bg-card/90 backdrop-blur-md z-10">
+        <div className="p-5 border-t border-border dark:border-slate-800 bg-card/90 dark:bg-[#121E33]/90 backdrop-blur-md z-10">
           <div className="relative flex items-center group">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent rounded-xl blur opacity-0 group-focus-within:opacity-100 transition-opacity" />
             <input 
@@ -442,7 +442,7 @@ export default function AICopilot() {
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={(e) => { if (e.key === 'Enter') handleSend(); }}
               placeholder="Query YatraFlow intelligence or request a simulation..." 
-              className="w-full relative bg-surface border border-border/80 rounded-xl pl-5 pr-14 py-4 text-[15px] text-text placeholder:text-secondary focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/60 shadow-inner transition-all"
+              className="w-full relative bg-surface dark:bg-[#0B1221] border border-border/80 dark:border-slate-700 rounded-xl pl-5 pr-14 py-4 text-[15px] text-text dark:text-white placeholder:text-secondary dark:placeholder:text-slate-500 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/60 shadow-inner transition-all"
             />
             <button 
               onClick={handleSend}

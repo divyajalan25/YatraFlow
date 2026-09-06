@@ -307,8 +307,9 @@ export default function BookingManagement() {
                   </div>
                 </div>
               </div>
-
-              </div>
+            </div>
+                      
+            
 
               {/* 📱 LIVE MOBILE BOOKINGS — from bridge server */}
               <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
