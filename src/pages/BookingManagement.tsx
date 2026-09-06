@@ -379,30 +379,52 @@ export default function BookingManagement() {
               </div>
 
               {/* LIVE SUMMARY MINI */}
-              <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm grid grid-cols-2 gap-3">
-                <div className="bg-slate-50 border border-slate-100 rounded-lg p-2.5">
-                  <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mb-1">Cancellations</div>
-                  <div className="text-[14px] font-black text-red-500">142</div>
-                </div>
-                <div className="bg-slate-50 border border-slate-100 rounded-lg p-2.5">
-                  <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mb-1">Overbooked</div>
-                  <div className="text-[14px] font-black text-orange-500">4 Slots</div>
-                </div>
-                <div className="bg-slate-50 border border-slate-100 rounded-lg p-2.5">
-                  <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mb-1">Est. Revenue</div>
-                  <div className="text-[14px] font-black text-emerald-600 flex items-center gap-1"><ArrowUpRight className="w-3 h-3"/> +12%</div>
-                </div>
-                <div className="bg-slate-50 border border-slate-100 rounded-lg p-2.5">
-                  <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mb-1">AI Health</div>
-                  <div className="text-[14px] font-black text-[#0E1A2B]">Online</div>
-                </div>
+            <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm grid grid-cols-2 gap-3">
+              <div className="bg-slate-50 border border-slate-100 rounded-lg p-2.5">
+                <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                  Cancellations</div>
+    
+                <div className="text-[14px] font-black text-red-500">142</div>
               </div>
 
+  
+              <div className="bg-slate-50 border border-slate-100 rounded-lg p-2.5">
+    
+                <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                  Overbooked
+    
+                </div>
+    
+                <div className="text-[14px] font-black text-orange-500">
+      
+                  4 Slots
+    
+                </div>
+  
+              </div>
+              <div className="bg-slate-50 border border-slate-100 rounded-lg p-2.5">
+    
+                <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                  Est. Revenue
+    
+                </div>
+    
+                <div className="text-[14px] font-black text-emerald-600 flex items-center gap-1">
+      
+                  <ArrowUpRight className="w-3 h-3" />
+                  +12%
+                </div>
+              </div>
+              <div className="bg-slate-50 border border-slate-100 rounded-lg p-2.5">
+    
+                <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                  AI Health
+                </div>
+    
+                <div className="text-[14px] font-black text-[#0E1A2B]">
+                  Online
+                </div>
+              </div>
             </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
   );
 }
