@@ -385,5 +385,13 @@ export default function BookingManagement() {
                 </div>
               </div>
             </div>
+
+            </div> {/* closes .sticky top-4 space-y-4 */}
+          </div> {/* closes .w-full xl:w-[30%] shrink-0 (right column) */}
+
+        </div> {/* closes ROW 2: flex flex-col xl:flex-row gap-4 items-start w-full */}
+
+      </div> {/* closes .relative z-10 w-full px-4 space-y-4 pt-4 */}
+    </div> {/* closes root .w-full max-w-[100vw] ... */}
   );
 }
